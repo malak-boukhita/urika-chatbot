@@ -27,14 +27,11 @@ Les conversations ne sont pas enregistrées de manière permanente.
 - [Services couverts](#services-couverts)
 - [Technologies](#technologies)
 - [Structure du projet](#structure-du-projet)
-- [Prérequis](#prérequis)
 - [Installation](#installation)
 - [Configuration](#configuration)
-- [Lancement du projet](#lancement-du-projet)
 - [Utilisation](#utilisation)
 - [Référence API](#référence-api)
 - [Tests](#tests)
-- [Déploiement](#déploiement)
 - [Auteur](#auteur)
 
 ## Aperçu
@@ -126,25 +123,6 @@ URIKA-CHATBOT/
 └── README.md
 ```
 
-Les éléments suivants ne doivent pas être publiés :
-
-```text
-backend/.env
-backend/.venv/
-backend/__pycache__/
-*.pyc
-```
-
-## Prérequis
-
-- Python installé sur l’ordinateur.
-- Python 3.10 ou une version plus récente recommandée.
-- Une connexion Internet.
-- Une clé API OpenAI valide.
-- Un modèle OpenAI accessible avec cette clé.
-- Visual Studio Code ou un autre éditeur.
-- Un navigateur récent.
-- Git et GitHub Desktop pour le versionnement.
 
 ## Installation
 
@@ -229,85 +207,7 @@ OPENAI_MODEL=
 
 Il ne doit contenir aucun secret.
 
-### Configuration CORS
 
-Pendant le développement, le backend autorise :
-
-```text
-http://127.0.0.1:5500
-http://localhost:5500
-```
-
-En production, il doit autoriser les domaines validés par l’entreprise, par exemple :
-
-```text
-https://urikacloud.com
-https://www.urikacloud.com
-```
-
-## Lancement du projet
-
-Le projet utilise deux serveurs locaux :
-
-```text
-Backend  → port 8000
-Frontend → port 5500
-```
-
-### Lancer le backend
-
-Depuis le dossier `backend` :
-
-```powershell
-.\.venv\Scripts\python.exe -m uvicorn main:app --reload
-```
-
-Résultat attendu :
-
-```text
-Uvicorn running on http://127.0.0.1:8000
-Application startup complete.
-```
-
-Laisser ce terminal ouvert.
-
-### Vérifier le backend
-
-Ouvrir dans le navigateur :
-
-```text
-http://127.0.0.1:8000/health
-```
-
-Résultat attendu :
-
-```json
-{
-  "status": "ok",
-  "service": "URIKA CLOUD chatbot"
-}
-```
-
-### Ouvrir la documentation FastAPI
-
-```text
-http://127.0.0.1:8000/docs
-```
-
-### Lancer le frontend
-
-Ouvrir un deuxième terminal à la racine du projet :
-
-```powershell
-cd frontend
-py -m http.server 5500
-```
-
-Puis ouvrir dans le navigateur :
-
-```text
-http://127.0.0.1:5500
-```
 
 ## Utilisation
 
@@ -387,7 +287,6 @@ Réponse réussie :
 }
 ```
 
-Le champ `message` doit contenir entre 1 et 800 caractères.
 
 ## Tests
 
@@ -410,102 +309,9 @@ Je cherche une solution CRM.
 ```
 
 ```text
-Mon ordinateur professionnel est en panne.
-```
-
-```text
 Pouvez-vous installer un réseau informatique ?
 ```
 
-### Prix
-
-Question :
-
-```text
-Combien coûte un site web ?
-```
-
-Comportement attendu :
-
-- ne pas inventer de montant ;
-- expliquer que le prix dépend des besoins ;
-- proposer une demande de devis.
-
-### Délais
-
-Question :
-
-```text
-Combien de temps faut-il pour créer une application ?
-```
-
-Comportement attendu :
-
-- ne pas inventer de délai ;
-- expliquer qu’une étude du besoin est nécessaire.
-
-### Question hors sujet
-
-Question :
-
-```text
-Donne-moi une recette de pizza.
-```
-
-Comportement attendu :
-
-- recentrer poliment la conversation sur URIKA CLOUD.
-
-### Information inconnue
-
-Question :
-
-```text
-Quels sont vos horaires exacts ?
-```
-
-Comportement attendu :
-
-- ne pas inventer les horaires ;
-- indiquer que l’information n’est pas disponible.
-
-## Déploiement
-
-L’adresse prévue pour le backend hébergé est :
-
-```text
-https://ais.urikacloud.com
-```
-
-Pendant le développement local, le fichier `frontend/index.html` contient :
-
-```html
-<script
-  src="script.js"
-  data-api-url="http://127.0.0.1:8000"
-></script>
-```
-
-Après l’hébergement et après validation de :
-
-```text
-https://ais.urikacloud.com/health
-```
-
-remplacer l’adresse locale par :
-
-```html
-<script
-  src="script.js"
-  data-api-url="https://ais.urikacloud.com"
-></script>
-```
-
-Le frontend appellera alors :
-
-```text
-https://ais.urikacloud.com/chat
-```
 
 ### Configuration du serveur
 
@@ -521,21 +327,6 @@ Puis installer les dépendances :
 ```bash
 pip install -r requirements.txt
 ```
-
-Exemple de commande de lancement :
-
-```bash
-uvicorn main:app --host 0.0.0.0 --port 8000
-```
-
-Le serveur devra également configurer :
-
-- le nom de domaine ;
-- HTTPS ;
-- le proxy inverse ;
-- les variables d’environnement ;
-- les origines CORS ;
-- le redémarrage automatique du backend.
 
 ## Auteur
 
