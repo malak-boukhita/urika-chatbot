@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Assistant intelligent des services URIKA CLOUD"><title>Assistant URIKA CLOUD</title><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"><link rel="stylesheet" href="style.css"></head>
+<body>
+  <main class="demo">
+    <section class="hero">
+      <div class="brand"><div class="brand-icon" aria-hidden="true"><i class="fa-solid fa-cloud"></i></div><div><strong>URIKA CLOUD</strong><span>We grow together</span></div></div>
+      <p class="hero-label"><i class="fa-solid fa-robot"></i> Assistant intelligent</p>
+      <h1>Découvrez les services adaptés à notre entreprise</h1>
+      <p class="hero-description">Posez une question sur la création de sites web, les applications, le marketing digital, les réseaux, la maintenance informatique, la vidéosurveillance ou les formations.</p>
+      <button id="hero-button" class="primary-button" type="button"><i class="fa-solid fa-comments"></i> Discuter avec l’assistant</button>
+    </section>
+  </main>
+  <button id="chatbot-toggler" class="chatbot-toggler" type="button" aria-label="Ouvrir le chatbot" aria-expanded="false"><span class="icon open-icon" aria-hidden="true"><i class="fa-solid fa-comment-dots"></i></span><span class="icon close-icon" aria-hidden="true"><i class="fa-solid fa-xmark"></i></span></button>
+  <section id="chatbot-popup" class="chatbot-popup" aria-label="Assistant virtuel URIKA CLOUD" aria-hidden="true">
+    <header class="chat-header">
+      <div class="header-info"><div class="chatbot-logo" aria-hidden="true"><i class="fa-solid fa-robot"></i></div><div><h2>Assistant URIKA CLOUD</h2><p><span class="online" aria-hidden="true"></span> Assistant en ligne</p></div></div>
+      <button id="close-chatbot" class="header-button" type="button" aria-label="Fermer le chatbot"><i class="fa-solid fa-xmark"></i></button>
+    </header>
+    <div class="suggestions" aria-label="Questions suggérées">
+      <button type="button" class="suggestion-button" data-question="Quels services propose URIKA CLOUD ?"><i class="fa-solid fa-list-check"></i> Nos services</button>
+      <button type="button" class="suggestion-button" data-question="Pouvez-vous créer un site web pour mon entreprise ?"><i class="fa-solid fa-globe"></i> Site web</button>
+      <button type="button" class="suggestion-button" data-question="Proposez-vous l’installation de caméras de vidéosurveillance ?"><i class="fa-solid fa-video"></i> Caméras</button>
+      <button type="button" class="suggestion-button" data-question="Proposez-vous des formations ?"><i class="fa-solid fa-graduation-cap"></i> Formations</button>
+    </div>
+    <div id="chat-body" class="chat-body" aria-live="polite" aria-relevant="additions">
+      <div class="message bot-message"><div class="message-avatar" aria-hidden="true"><i class="fa-solid fa-robot"></i></div><div class="message-content"><p>Bonjour ! Je suis l’assistant virtuel d’URIKA CLOUD.</p><p>Décrivez votre besoin ou posez-moi une question sur les services de l’entreprise.</p></div></div>
+    </div>
+    <footer class="chat-footer">
+      <form id="chat-form" class="chat-form">
+        <div class="input-wrapper"><label class="visually-hidden" for="message-input">Votre question</label><textarea id="message-input" class="message-input" placeholder="Écrivez votre question..." maxlength="800" rows="1" required></textarea><button id="send-message" class="send-button" type="submit" aria-label="Envoyer le message"><i class="fa-solid fa-paper-plane"></i></button></div>
+        <p class="chat-notice"><i class="fa-solid fa-circle-info"></i> L’assistant répond à partir des services officiels d’URIKA CLOUD.</p>
+      </form>
+    </footer>
+  </section>
+  <script src="script.js" data-api-url="http://127.0.0.1:8000"></script>
+</body>
+</html>
