@@ -52,6 +52,14 @@ Les conversations ne sont pas enregistrées de manière permanente.
   >
 </p>
 
+<p align="center">
+  <img
+    src="assets/chatbot-question.png"
+    alt="Fenêtre du chatbot URIKA CLOUD"
+    width="500"
+  >
+</p>
+
 ## Fonctionnalités
 
 - Interface de chatbot flottante.
@@ -59,7 +67,6 @@ Les conversations ne sont pas enregistrées de manière permanente.
 - Interface responsive pour ordinateur, tablette et téléphone.
 - Questions suggérées pour faciliter la navigation.
 - Envoi d’un message avec le bouton ou la touche `Entrée`.
-- Utilisation de `Maj + Entrée` pour ajouter une nouvelle ligne.
 - Animation pendant la préparation de la réponse.
 - Appel sécurisé du backend FastAPI.
 - Connexion du backend à l’API OpenAI.
@@ -67,8 +74,6 @@ Les conversations ne sont pas enregistrées de manière permanente.
 - Limitation des messages à 800 caractères.
 - Gestion des erreurs réseau et serveur.
 - Réponses en français.
-- Aucune clé API placée dans le frontend.
-- Aucune conservation permanente des conversations.
 
 ## Services couverts
 
@@ -104,7 +109,8 @@ Le chatbot peut répondre aux questions concernant les services suivants :
 URIKA-CHATBOT/
 ├── assets/
 │   ├── chatbot-page.png
-│   └── chatbot-open.png
+│   ├── chatbot-open.png
+│   └── chatbot-question.png
 │
 ├── frontend/
 │   ├── index.html
@@ -133,7 +139,6 @@ git clone URL_DU_DEPOT
 cd urika-chatbot
 ```
 
-Pour un projet déjà présent sur l’ordinateur, ouvrir directement le dossier dans Visual Studio Code.
 
 ### 2. Accéder au backend
 
@@ -182,30 +187,6 @@ Ajouter :
 OPENAI_API_KEY=VOTRE_CLE_OPENAI
 OPENAI_MODEL=NOM_DU_MODELE_AUTORISE
 ```
-
-Exemple de structure uniquement :
-
-```env
-OPENAI_API_KEY=sk-proj-xxxxxxxxxxxxxxxx
-OPENAI_MODEL=nom-du-modele
-```
-
-Ne jamais utiliser une fausse valeur comme :
-
-```env
-OPENAI_API_KEY=COLLE_TA_CLE_ICI
-```
-
-### Fichier `.env.example`
-
-Le fichier publié dans GitHub doit contenir uniquement :
-
-```env
-OPENAI_API_KEY=
-OPENAI_MODEL=
-```
-
-Il ne doit contenir aucun secret.
 
 
 
