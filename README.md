@@ -312,4 +312,5 @@ pip install -r requirements.txt
 ## Auteur
 
 **Malak Boukhita** 
+
 Projet réalisé dans le cadre du développement d’un chatbot intelligent pour URIKA CLOUD.
