@@ -271,6 +271,38 @@ Réponse réussie :
 
 ## Tests
 
+### Accessibilité clavier du frontend
+
+Avec Node.js 24.15 ou ultérieur, depuis la racine du dépôt :
+
+```bash
+npm ci
+npx playwright install chromium
+npm test
+```
+
+Sous Linux, si des bibliothèques système sont manquantes, utiliser
+`npx playwright install --with-deps chromium`.
+
+Pour exécuter uniquement les tests de régression DOM (sans navigateur) :
+
+```bash
+npm run test:unit
+```
+
+Les tests DOM vérifient le focus et les événements, mais ne simulent pas la
+navigation Tab ni le comportement natif de `inert`. La suite Chromium
+(`npm run test:browser`) vérifie ces comportements dans un navigateur.
+
+Les tests Chromium utilisent les fichiers du frontend et simulent les réponses
+API, sans backend ni clé OpenAI. Ils vérifient les deux boutons d’ouverture,
+le retour du focus à la fermeture, Échap, Tab/Maj+Tab, les attributs ARIA,
+les suggestions et les réponses reçues après fermeture.
+
+Le chatbot est un dialogue non modal : Tab peut rejoindre la page, et Échap
+ferme le chatbot lorsque le focus est à l’intérieur. Les contrôles du chatbot
+fermé sont inertes et exclus de la navigation clavier.
+
 ### Questions relatives aux services
 
 ```text
