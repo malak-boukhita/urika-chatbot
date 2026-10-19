@@ -11,3 +11,5 @@ backend/__pycache__/
 .vscode/
 
 .log
+
+node_modules/

@@ -8,13 +8,13 @@
       <p class="hero-label"><i class="fa-solid fa-robot"></i> Assistant intelligent</p>
       <h1>Découvrez les services adaptés à notre entreprise</h1>
       <p class="hero-description">Posez une question sur la création de sites web, les applications, le marketing digital, les réseaux, la maintenance informatique, la vidéosurveillance ou les formations.</p>
-      <button id="hero-button" class="primary-button" type="button"><i class="fa-solid fa-comments"></i> Discuter avec l’assistant</button>
+      <button id="hero-button" class="primary-button" type="button" aria-haspopup="dialog" aria-controls="chatbot-popup" aria-expanded="false"><i class="fa-solid fa-comments"></i> Discuter avec l’assistant</button>
     </section>
   </main>
-  <button id="chatbot-toggler" class="chatbot-toggler" type="button" aria-label="Ouvrir le chatbot" aria-expanded="false"><span class="icon open-icon" aria-hidden="true"><i class="fa-solid fa-comment-dots"></i></span><span class="icon close-icon" aria-hidden="true"><i class="fa-solid fa-xmark"></i></span></button>
-  <section id="chatbot-popup" class="chatbot-popup" aria-label="Assistant virtuel URIKA CLOUD" aria-hidden="true">
+  <button id="chatbot-toggler" class="chatbot-toggler" type="button" aria-label="Ouvrir le chatbot" aria-haspopup="dialog" aria-controls="chatbot-popup" aria-expanded="false"><span class="icon open-icon" aria-hidden="true"><i class="fa-solid fa-comment-dots"></i></span><span class="icon close-icon" aria-hidden="true"><i class="fa-solid fa-xmark"></i></span></button>
+  <section id="chatbot-popup" class="chatbot-popup" role="dialog" aria-modal="false" aria-labelledby="chatbot-title" aria-hidden="true" inert>
     <header class="chat-header">
-      <div class="header-info"><div class="chatbot-logo" aria-hidden="true"><i class="fa-solid fa-robot"></i></div><div><h2>Assistant URIKA CLOUD</h2><p><span class="online" aria-hidden="true"></span> Assistant en ligne</p></div></div>
+      <div class="header-info"><div class="chatbot-logo" aria-hidden="true"><i class="fa-solid fa-robot"></i></div><div><h2 id="chatbot-title">Assistant URIKA CLOUD</h2><p><span class="online" aria-hidden="true"></span> Assistant en ligne</p></div></div>
       <button id="close-chatbot" class="header-button" type="button" aria-label="Fermer le chatbot"><i class="fa-solid fa-xmark"></i></button>
     </header>
     <div class="suggestions" aria-label="Questions suggérées">

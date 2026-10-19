@@ -15,21 +15,45 @@ const suggestionButtons = document.querySelectorAll("[data-question]");
 
 let requestInProgress = false;
 
-function openChatbot() {
+let chatbotOpener = chatbotToggler;
+
+function isChatbotOpen() {
+  return document.body.classList.contains("show-chatbot");
+}
+
+function openChatbot(opener = chatbotToggler) {
+  // Suggestions inside an open chat must not replace the original opener.
+  if (isChatbotOpen()) {
+    return;
+  }
+
+  chatbotOpener = opener;
+  chatbotPopup.inert = false;
   document.body.classList.add("show-chatbot");
   chatbotToggler.setAttribute("aria-expanded", "true");
+  heroButton.setAttribute("aria-expanded", "true");
   chatbotPopup.setAttribute("aria-hidden", "false");
   chatbotToggler.setAttribute("aria-label", "Fermer le chatbot");
 
-  window.setTimeout(() => {
-    messageInput.focus();
-  }, 220);
+  // Focus immediately so a delayed callback cannot steal focus after closing.
+  (messageInput.disabled ? closeChatbotButton : messageInput).focus();
 }
 
 function closeChatbot() {
+  if (!isChatbotOpen()) {
+    return;
+  }
+
+  const returnTarget = chatbotOpener?.isConnected && !chatbotOpener.disabled
+    ? chatbotOpener
+    : chatbotToggler;
+  // Move focus out before hiding the dialog from assistive technology.
+  returnTarget.focus();
   document.body.classList.remove("show-chatbot");
   chatbotToggler.setAttribute("aria-expanded", "false");
+  heroButton.setAttribute("aria-expanded", "false");
   chatbotPopup.setAttribute("aria-hidden", "true");
+  chatbotPopup.inert = true;
   chatbotToggler.setAttribute("aria-label", "Ouvrir le chatbot");
 }
 
@@ -137,6 +161,10 @@ function resizeInput() {
 
 function setLoadingState(isLoading) {
   requestInProgress = isLoading;
+  // Keep keyboard focus in the dialog when its active control is disabled.
+  if (isLoading && (document.activeElement === messageInput || document.activeElement === sendButton)) {
+    closeChatbotButton.focus();
+  }
   messageInput.disabled = isLoading;
   sendButton.disabled = isLoading;
 
@@ -217,7 +245,10 @@ async function sendMessage(rawMessage) {
     addMessage(message, "error");
   } finally {
     setLoadingState(false);
-    messageInput.focus();
+    // A response must not pull focus back from the page or a closed chat.
+    if (isChatbotOpen() && chatbotPopup.contains(document.activeElement)) {
+      messageInput.focus();
+    }
   }
 }
 
@@ -227,16 +258,19 @@ chatbotToggler.addEventListener("click", () => {
   if (isOpen) {
     closeChatbot();
   } else {
-    openChatbot();
+    openChatbot(chatbotToggler);
   }
 });
 
-heroButton.addEventListener("click", openChatbot);
+heroButton.addEventListener("click", () => openChatbot(heroButton));
 
 closeChatbotButton.addEventListener("click", closeChatbot);
 
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && document.body.classList.contains("show-chatbot")) {
+  // This is a non-modal dialog: Tab may leave it; Escape applies within it.
+  if (event.key === "Escape" && !event.defaultPrevented && !event.isComposing
+      && isChatbotOpen() && chatbotPopup.contains(event.target)) {
+    event.preventDefault();
     closeChatbot();
   }
 });
